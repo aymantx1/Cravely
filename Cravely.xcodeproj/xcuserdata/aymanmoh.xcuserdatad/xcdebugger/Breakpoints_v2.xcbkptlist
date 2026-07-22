@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F2D9F21D-B72B-4FF1-9848-85087BF762A8"
-            shouldBeEnabled = "No"
+            uuid = "2CA1271C-C86E-4E71-BF00-CD79083106EB"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Cravely/Controllers/ViewController.swift"
+            filePath = "Cravely/Controllers/SettingsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "updateColors()"
-            landmarkType = "7">
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "SettingsViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

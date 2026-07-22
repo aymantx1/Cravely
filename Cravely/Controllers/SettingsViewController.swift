@@ -11,7 +11,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .red
 
         // This is where you put any setup code that runs when the screen loads
     }
