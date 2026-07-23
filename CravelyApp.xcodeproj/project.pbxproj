@@ -7,32 +7,19 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		40120B813007DCF800DB7D8A /* Cravely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cravely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40B7084C301146A200E37C25 /* CravelyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CravelyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		40120B933007DCF900DB7D8A /* Exceptions for "Cravely" folder in "Cravely" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 40120B803007DCF800DB7D8A /* Cravely */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		40120B833007DCF800DB7D8A /* Cravely */ = {
+		40B7084E301146A200E37C25 /* CravelyApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				40120B933007DCF900DB7D8A /* Exceptions for "Cravely" folder in "Cravely" target */,
-			);
-			path = Cravely;
+			path = CravelyApp;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		40120B7E3007DCF800DB7D8A /* Frameworks */ = {
+		40B70849301146A200E37C25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,18 +29,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		40120B783007DCF800DB7D8A = {
+		40B70843301146A200E37C25 = {
 			isa = PBXGroup;
 			children = (
-				40120B833007DCF800DB7D8A /* Cravely */,
-				40120B823007DCF800DB7D8A /* Products */,
+				40B7084E301146A200E37C25 /* CravelyApp */,
+				40B7084D301146A200E37C25 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		40120B823007DCF800DB7D8A /* Products */ = {
+		40B7084D301146A200E37C25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40120B813007DCF800DB7D8A /* Cravely.app */,
+				40B7084C301146A200E37C25 /* CravelyApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,64 +48,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		40120B803007DCF800DB7D8A /* Cravely */ = {
+		40B7084B301146A200E37C25 /* CravelyApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40120B943007DCF900DB7D8A /* Build configuration list for PBXNativeTarget "Cravely" */;
+			buildConfigurationList = 40B70857301146A400E37C25 /* Build configuration list for PBXNativeTarget "CravelyApp" */;
 			buildPhases = (
-				40120B7D3007DCF800DB7D8A /* Sources */,
-				40120B7E3007DCF800DB7D8A /* Frameworks */,
-				40120B7F3007DCF800DB7D8A /* Resources */,
+				40B70848301146A200E37C25 /* Sources */,
+				40B70849301146A200E37C25 /* Frameworks */,
+				40B7084A301146A200E37C25 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				40120B833007DCF800DB7D8A /* Cravely */,
+				40B7084E301146A200E37C25 /* CravelyApp */,
 			);
-			name = Cravely;
+			name = CravelyApp;
 			packageProductDependencies = (
 			);
-			productName = Cravely;
-			productReference = 40120B813007DCF800DB7D8A /* Cravely.app */;
+			productName = CravelyApp;
+			productReference = 40B7084C301146A200E37C25 /* CravelyApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		40120B793007DCF800DB7D8A /* Project object */ = {
+		40B70844301146A200E37C25 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
-					40120B803007DCF800DB7D8A = {
+					40B7084B301146A200E37C25 = {
 						CreatedOnToolsVersion = 26.6;
 					};
 				};
 			};
-			buildConfigurationList = 40120B7C3007DCF800DB7D8A /* Build configuration list for PBXProject "Cravely" */;
+			buildConfigurationList = 40B70847301146A200E37C25 /* Build configuration list for PBXProject "CravelyApp" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 40120B783007DCF800DB7D8A;
+			mainGroup = 40B70843301146A200E37C25;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 40120B823007DCF800DB7D8A /* Products */;
+			productRefGroup = 40B7084D301146A200E37C25 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				40120B803007DCF800DB7D8A /* Cravely */,
+				40B7084B301146A200E37C25 /* CravelyApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		40120B7F3007DCF800DB7D8A /* Resources */ = {
+		40B7084A301146A200E37C25 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,7 +115,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		40120B7D3007DCF800DB7D8A /* Sources */ = {
+		40B70848301146A200E37C25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -138,69 +125,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		40120B953007DCF900DB7D8A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7US2RP2LLA;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Cravely/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.Cravely;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		40120B963007DCF900DB7D8A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7US2RP2LLA;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Cravely/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.Cravely;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		40120B973007DCF900DB7D8A /* Debug */ = {
+		40B70855301146A400E37C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -264,7 +189,7 @@
 			};
 			name = Debug;
 		};
-		40120B983007DCF900DB7D8A /* Release */ = {
+		40B70856301146A400E37C25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -321,28 +246,92 @@
 			};
 			name = Release;
 		};
+		40B70858301146A400E37C25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7US2RP2LLA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.CravelyApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		40B70859301146A400E37C25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7US2RP2LLA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.CravelyApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		40120B7C3007DCF800DB7D8A /* Build configuration list for PBXProject "Cravely" */ = {
+		40B70847301146A200E37C25 /* Build configuration list for PBXProject "CravelyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40120B973007DCF900DB7D8A /* Debug */,
-				40120B983007DCF900DB7D8A /* Release */,
+				40B70855301146A400E37C25 /* Debug */,
+				40B70856301146A400E37C25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		40120B943007DCF900DB7D8A /* Build configuration list for PBXNativeTarget "Cravely" */ = {
+		40B70857301146A400E37C25 /* Build configuration list for PBXNativeTarget "CravelyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40120B953007DCF900DB7D8A /* Debug */,
-				40120B963007DCF900DB7D8A /* Release */,
+				40B70858301146A400E37C25 /* Debug */,
+				40B70859301146A400E37C25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 40120B793007DCF800DB7D8A /* Project object */;
+	rootObject = 40B70844301146A200E37C25 /* Project object */;
 }
