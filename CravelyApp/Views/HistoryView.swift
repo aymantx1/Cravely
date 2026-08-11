@@ -4,28 +4,54 @@
 //
 //  Created by ayman moh on 23/07/2026.
 //
-
 import SwiftUI
-
+import SwiftData
 
 struct HistoryView: View {
-    @State var craves: Bool  = true
+    @Environment(AppModel.self) private var appModel
+    @Environment(\.modelContext) private var modelContext
+        
+    // 1. Declare @Query without setting the predicate inline
+    @Query private var todaysTaps: [Tap]
+        
+    // 2. Compute startOfDay outside the macro in init()
+    init() {
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+            
+        _todaysTaps = Query(
+            filter: #Predicate<Tap> { tap in
+                tap.time >= startOfDay
+            },
+            sort: \Tap.time,
+            order: .reverse
+        )
+    }
+
+        private var craves: Bool {
+            !todaysTaps.isEmpty
+        }
+            
+        private var totalMoneySavedToday: Double {
+            todaysTaps.reduce(0) { $0 + $1.price }
+        }
     
     var body: some View {
         VStack {
             headerView
+            
             if craves {
                 ScrollView(.vertical, showsIndicators: true) {
-                        HistoryListView
-                            .padding(.horizontal)
+                    HistoryListView
+                        .padding(.horizontal)
                 }
             } else {
                 EmptyHistoryView
             }
             Spacer()
-        }    .frame(maxWidth: .infinity, maxHeight: .infinity)
-        
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+    
     private var headerView: some View {
         HStack {
             Text("Cravely")
@@ -41,84 +67,81 @@ struct HistoryView: View {
         .padding(.bottom, 30)
     }
     
-    
     private var EmptyHistoryView: some View {
-        VStack(alignment: .center, spacing: 15){
-            
+        VStack(alignment: .center, spacing: 15) {
             Spacer()
             
-            HStack{
+            HStack {
                 Image("clipBoard")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
                     .opacity(0.3)
             }
-            HStack{
-                Text("No Cravings yet")
+            HStack {
+                Text("No Cravings Today")
                     .fontWeight(.bold)
                     .font(.system(size: 17))
             }
-            HStack{
+            HStack {
                 Text("Tap \"I Crave One\" on the home screen when you feel the urge")
                     .font(.system(size: 12))
                     .opacity(0.5)
             }
             Spacer()
         }
-        
     }
     
     private var HistoryListView: some View {
-        LazyVStack (spacing: 12){
-            HStack{
-                ZStack{
+        LazyVStack(spacing: 12) {
+            HStack {
+                ZStack {
                     Rectangle()
                         .fill(Color(red: 17/255, green: 17/255, blue: 17/255))
                         .frame(width: 170, height: 100)
                         .cornerRadius(14)
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("3")
+                        Text("\(todaysTaps.count)")
                             .font(.system(size: 28))
                             .foregroundStyle(.green)
                             .bold()
-                        Text("Total resisted")
+                        Text("Resisted Today")
                             .font(.system(size: 14))
                             .opacity(0.5)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    
                 }
                 
-                ZStack{
+                ZStack {
                     Rectangle()
                         .fill(Color(red: 17/255, green: 17/255, blue: 17/255))
                         .frame(width: 170, height: 100)
                         .cornerRadius(14)
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("$3")
+                        Text("$\(totalMoneySavedToday, specifier: "%.2f")")
                             .font(.system(size: 28))
                             .foregroundStyle(.green)
                             .bold()
-                        Text("Total saved")
+                        Text("Saved today")
                             .font(.system(size: 14))
                             .opacity(0.5)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    
                 }
             }
-            HStack{
+            
+            HStack {
                 Text(Date.now.formatted(.dateTime.weekday(.wide).month(.wide).day()))
                     .font(.system(size: 14))
                     .opacity(0.5)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            ForEach(0..<20, id: \.self){_ in
+            
+            ForEach(todaysTaps) { tap in
                 HStack(spacing: 12) {
                     Rectangle()
                         .fill(.green)
@@ -126,17 +149,17 @@ struct HistoryView: View {
                         .cornerRadius(4)
                     
                     VStack(alignment: .leading) {
-                        Text("15:12")
+                        Text(tap.time.formatted(date: .omitted, time: .shortened))
                             .font(.system(size: 15))
                             .fontWeight(.semibold)
-                        Text("Malboro Gold")
+                        Text(tap.brand.rawValue)
                             .font(.system(size: 14))
                             .opacity(0.5)
                     }
                     
                     Spacer()
                     
-                    Text("+$9.5")
+                    Text("$\(tap.price, specifier: "%.2f")")
                         .font(.system(size: 16))
                         .foregroundStyle(.green)
                         .fontWeight(.semibold)
@@ -148,15 +171,12 @@ struct HistoryView: View {
                     Color(red: 17/255, green: 17/255, blue: 17/255)
                         .cornerRadius(14)
                 )
-                
-                
             }
         }
-        
-        
     }
 }
-    #Preview {
-        HistoryView()
-    }
 
+#Preview {
+    HistoryView()
+        .environment(AppModel())
+}

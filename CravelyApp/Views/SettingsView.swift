@@ -8,73 +8,18 @@
 import SwiftUI
 
 struct SettingsView: View {
-
-    // MARK: - State
-
-    @State private var habitType: HabitType = .cigs
-    @State private var selectedBrand: String = "Marlboro Red"
-    @State private var selectedCity: String = "New York"
-    @State private var price: Double = 9.5
-    @State private var dailyReminders: Bool = true
+    //Note needs work
     @State private var showResetConfirmation: Bool = false
 
-    // MARK: - Data
-
-    let brands = [
-        "Marlboro Red",
-        "Marlboro Gold",
-        "Camel",
-        "Winston",
-        "Parliament"
-    ]
-
-    let cities = [
-        "New York",
-        "Los Angeles",
-        "Chicago",
-        "Houston",
-        "Phoenix",
-        "Philadelphia",
-        "San Antonio",
-        "San Diego",
-        "Dallas",
-        "Austin",
-        "Jacksonville",
-        "San Jose",
-        "Fort Worth",
-        "Columbus",
-        "Charlotte",
-        "Indianapolis",
-        "Seattle",
-        "Denver",
-        "Washington, DC",
-        "Boston",
-        "Nashville",
-        "Las Vegas",
-        "Portland",
-        "Miami",
-        "Atlanta"
-    ]
-
-    enum HabitType: String, CaseIterable {
-        case cigs = "Cigs"
-        case cannabis = "Cannabis"
-
-        var emoji: String {
-            switch self {
-            case .cigs: return "🚬"
-            case .cannabis: return "🌿"
-            }
-        }
-    }
-
+ 
     // MARK: - Body
+    @Environment(AppModel.self) private var appModel
 
     var body: some View {
+        
         VStack(spacing: 20) {
             headerView
             habitView
-            locationView
             notificationsView
             dataView
 
@@ -89,6 +34,7 @@ struct SettingsView: View {
 // MARK: - Header
 
 private extension SettingsView {
+    
 
     var headerView: some View {
         HStack {
@@ -141,12 +87,13 @@ private extension SettingsView {
 
             Spacer()
 
-            habitTypeButton(for: .cigs)
+            habitTypeButton(for: .ciggeretes)
             habitTypeButton(for: .cannabis)
         }
     }
-
+    @ViewBuilder
     var brandRow: some View {
+        @Bindable var model = appModel
         HStack {
             Text("Brand")
                 .font(.system(size: 16))
@@ -155,14 +102,14 @@ private extension SettingsView {
             Spacer()
 
             Menu {
-                ForEach(brands, id: \.self) { brand in
+                ForEach(AppModel.CigaretteBrand.allCases) { brand in
                     Button {
-                        selectedBrand = brand
+                        model.selectedBrand = brand
                     } label: {
-                        if brand == selectedBrand {
-                            Label(brand, systemImage: "checkmark")
+                        if brand == model.selectedBrand {
+                            Label(brand.rawValue, systemImage: "checkmark")
                         } else {
-                            Text(brand)
+                            Text(brand.rawValue)
                         }
                     }
                 }
@@ -172,7 +119,7 @@ private extension SettingsView {
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color(white: 0.5))
 
-                    Text(selectedBrand)
+                    Text(model.selectedBrand.rawValue)
                         .font(.system(size: 16))
                         .foregroundStyle(Color(white: 0.6))
                 }
@@ -181,8 +128,9 @@ private extension SettingsView {
     }
 
     var priceRow: some View {
-        HStack {
-            Text("Price / unit")
+        @Bindable var model = appModel
+        return HStack {
+            Text("Price / pack")
                 .font(.system(size: 16))
                 .fontWeight(.semibold)
 
@@ -194,7 +142,7 @@ private extension SettingsView {
 
                 TextField(
                     "0",
-                    value: $price,
+                    value: $model.packPrice,
                     format: .number
                         .precision(.fractionLength(0...2))
                         .locale(Locale(identifier: "en_US"))
@@ -207,13 +155,14 @@ private extension SettingsView {
             .font(.system(size: 16))
         }
     }
+    @ViewBuilder
+    func habitTypeButton(for type: AppModel.HabitType) -> some View {
+        @Bindable var model = appModel
+        let isSelected = model.habitType == type
 
-    func habitTypeButton(for type: HabitType) -> some View {
-        let isSelected = habitType == type
-
-        return Button {
+        Button {
             withAnimation(.easeInOut(duration: 0.15)) {
-                habitType = type
+                model.habitType = type
             }
         } label: {
             HStack(spacing: 6) {
@@ -238,64 +187,13 @@ private extension SettingsView {
     }
 }
 
-// MARK: - Location section
-
-private extension SettingsView {
-
-    var locationView: some View {
-        VStack(spacing: 15) {
-            Text("Location")
-                .font(.system(size: 16))
-                .opacity(0.5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            HStack {
-                Text("City")
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-
-                Spacer()
-
-                Menu {
-                    ForEach(cities, id: \.self) { city in
-                        Button {
-                            selectedCity = city
-                        } label: {
-                            if city == selectedCity {
-                                Label(city, systemImage: "checkmark")
-                            } else {
-                                Text(city)
-                            }
-                        }
-                    }
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(Color(white: 0.5))
-
-                        Text(selectedCity)
-                            .font(.system(size: 16))
-                            .foregroundStyle(Color(white: 0.6))
-                    }
-                }
-            }
-            .padding(16)
-            .frame(maxWidth: .infinity)
-            .background(
-                Color(red: 17/255, green: 17/255, blue: 17/255)
-                    .cornerRadius(14)
-            )
-        }
-    }
-}
 
 // MARK: - Notifications section
-
 private extension SettingsView {
-
     var notificationsView: some View {
-        VStack(spacing: 15) {
+        @Bindable var model = appModel
+        
+        return VStack(spacing: 15) {
             Text("Notifications")
                 .font(.system(size: 16))
                 .opacity(0.5)
@@ -308,7 +206,7 @@ private extension SettingsView {
 
                 Spacer()
 
-                Toggle("", isOn: $dailyReminders)
+                Toggle("", isOn: $model.dailyReminders)
                     .labelsHidden()
                     .tint(.green)
             }
@@ -372,4 +270,6 @@ private extension SettingsView {
 
 #Preview {
     SettingsView()
+        .environment(AppModel())
+
 }

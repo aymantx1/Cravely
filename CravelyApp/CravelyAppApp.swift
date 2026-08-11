@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CravelyAppApp: App {
+    @State private var appModel: AppModel = AppModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(appModel)
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 // MARK: - CravingViewModel
 
@@ -14,6 +15,7 @@ import SwiftUI
 /// SwiftData model when the persistence layer is wired in — the
 /// view itself won't need to change.
 @Observable
+
 final class CravingViewModel {
 
     var streakDays: Int
@@ -39,19 +41,15 @@ final class CravingViewModel {
         self.cigaretteBrand = cigaretteBrand
     }
 
-    func logResist() {
-        let impact = UIImpactFeedbackGenerator(style: .medium)
-        impact.impactOccurred()
-
-        resistedCount += 1
-        totalSaved += cigarettePrice
-        savedToday += cigarettePrice
-    }
+    
 }
 
 
 struct HomeView: View {
     @State private var viewModel = CravingViewModel()
+    @Environment(AppModel.self) private var appModel
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Tap.time, order: .reverse) private var taps: [Tap]
     private let greeting = "Good Morning Sun"
 
     var body: some View {
@@ -148,10 +146,11 @@ struct HomeView: View {
         }
         .padding(.vertical, 24)
     }
-
+    @ViewBuilder
     private var statsRow: some View {
+        @Bindable var model = appModel
         HStack {
-            statColumn(value: "\(viewModel.resistedCount)", label: "Resisted")
+            statColumn(value: "\(model.totalResisted)", label: "Resisted")
             statDivider
             statColumn(value: "\(viewModel.streakDays)", label: "Days clean")
             statDivider
@@ -186,8 +185,9 @@ struct HomeView: View {
     private var resistButtonSection: some View {
         VStack(alignment: .center, spacing: 20) {
             Button {
-                viewModel.logResist()
-            } label: {
+                appModel.addTap(context: modelContext)
+            }
+            label: {
                 resistButtonLabel
             }
             .buttonStyle(.plain)
@@ -223,4 +223,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(AppModel())
+
 }

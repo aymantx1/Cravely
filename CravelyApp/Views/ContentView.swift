@@ -5,13 +5,15 @@
 //  Created by ayman moh on 22/07/2026.
 //
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     enum Tab {
         case content, history, settings
     }
     @State private var selectedTab: Tab = .content
-
+    @Environment(AppModel.self) private var appModel
+    
     var body: some View {
         VStack(spacing: 0) {
             // Screen content area
@@ -28,7 +30,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, 10)
             .padding(.top, 10)
-
+            .modelContainer(for: Tap.self)
             // Pinned Tab Bar
             tabBar
                 .padding(.horizontal, 20)
@@ -73,4 +75,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(AppModel())
+
 }
