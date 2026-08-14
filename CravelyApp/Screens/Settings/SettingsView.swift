@@ -6,68 +6,82 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
-    //Note needs work
     @State private var showResetConfirmation: Bool = false
+    @FocusState private var isPriceFieldFocused: Bool
 
- 
-    // MARK: - Body
-    @Environment(AppModel.self) private var appModel
+    // MARK: - Dependencies
+    @Environment(SettingsViewModel.self) private var viewModel
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        
-        VStack(spacing: 20) {
-            headerView
-            habitView
-            notificationsView
-            dataView
+        ScrollView {
+            VStack(spacing: 20) {
+                headerView
+                habitView
+                notificationsView
+                dataView
 
-            Spacer()
+                Spacer()
+            }
+            .padding(16)
         }
-        .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.ignoresSafeArea())
+        // Tapping anywhere outside the price field dismisses the keyboard.
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isPriceFieldFocused = false
+        }
+        // .decimalPad has no Return/Done key, so without this there's no
+        // way to dismiss the keyboard once it's up.
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    isPriceFieldFocused = false
+                }
+            }
+        }
     }
 }
 
 // MARK: - Header
-
 private extension SettingsView {
-    
-
     var headerView: some View {
         HStack {
             Text("Cravely")
                 .font(.system(size: 28))
                 .fontWeight(.heavy)
+                .foregroundStyle(.white)
 
             Text("Settings")
                 .font(.system(size: 28))
                 .bold()
-                .opacity(0.5)
+                .foregroundStyle(.white.opacity(0.5))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.bottom, 10)
     }
 }
 
-// MARK: - Habit section
-
+// MARK: - Habit Section
 private extension SettingsView {
 
     var habitView: some View {
         VStack(spacing: 15) {
             Text("Habit")
                 .font(.system(size: 16))
-                .opacity(0.5)
+                .foregroundStyle(.white.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(spacing: 15) {
                 habitTypeRow
-                Divider()
-                brandRow
-                Divider()
+                Divider().background(Color.white.opacity(0.1))
+                brandOrProductRow
+                Divider().background(Color.white.opacity(0.1))
                 priceRow
             }
             .padding(16)
@@ -84,32 +98,47 @@ private extension SettingsView {
             Text("Type")
                 .font(.system(size: 16))
                 .fontWeight(.semibold)
+                .foregroundStyle(.white)
 
             Spacer()
 
-            habitTypeButton(for: .ciggeretes)
+            habitTypeButton(for: .cigarettes)
             habitTypeButton(for: .cannabis)
         }
     }
-    @ViewBuilder
-    var brandRow: some View {
-        @Bindable var model = appModel
+
+    var brandOrProductRow: some View {
         HStack {
-            Text("Brand")
+            Text(viewModel.habitType == .cigarettes ? "Brand" : "Product")
                 .font(.system(size: 16))
                 .fontWeight(.semibold)
+                .foregroundStyle(.white)
 
             Spacer()
 
             Menu {
-                ForEach(AppModel.CigaretteBrand.allCases) { brand in
-                    Button {
-                        model.selectedBrand = brand
-                    } label: {
-                        if brand == model.selectedBrand {
-                            Label(brand.rawValue, systemImage: "checkmark")
-                        } else {
-                            Text(brand.rawValue)
+                if viewModel.habitType == .cigarettes {
+                    ForEach(SettingsViewModel.CigaretteBrand.allCases) { brand in
+                        Button {
+                            viewModel.selectBrandOrProduct(brand.rawValue)
+                        } label: {
+                            if brand.rawValue == viewModel.selectedBrand {
+                                Label(brand.rawValue, systemImage: "checkmark")
+                            } else {
+                                Text(brand.rawValue)
+                            }
+                        }
+                    }
+                } else {
+                    ForEach(SettingsViewModel.CannabisProduct.allCases) { product in
+                        Button {
+                            viewModel.selectBrandOrProduct(product.rawValue)
+                        } label: {
+                            if product.rawValue == viewModel.selectedBrand {
+                                Label(product.rawValue, systemImage: "checkmark")
+                            } else {
+                                Text(product.rawValue)
+                            }
                         }
                     }
                 }
@@ -119,7 +148,7 @@ private extension SettingsView {
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color(white: 0.5))
 
-                    Text(model.selectedBrand.rawValue)
+                    Text(viewModel.selectedBrand)
                         .font(.system(size: 16))
                         .foregroundStyle(Color(white: 0.6))
                 }
@@ -128,11 +157,13 @@ private extension SettingsView {
     }
 
     var priceRow: some View {
-        @Bindable var model = appModel
+        @Bindable var vm = viewModel
+        
         return HStack {
-            Text("Price / pack")
+            Text(viewModel.habitType == .cigarettes ? "Price / pack" : "Price / item")
                 .font(.system(size: 16))
                 .fontWeight(.semibold)
+                .foregroundStyle(.white)
 
             Spacer()
 
@@ -142,27 +173,25 @@ private extension SettingsView {
 
                 TextField(
                     "0",
-                    value: $model.packPrice,
-                    format: .number
-                        .precision(.fractionLength(0...2))
-                        .locale(Locale(identifier: "en_US"))
+                    value: $vm.packPrice,
+                    format: .number.precision(.fractionLength(0...2))
                 )
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
                 .foregroundStyle(Color(white: 0.6))
-                .frame(width: 60)
+                .frame(width: 70)
+                .focused($isPriceFieldFocused)
             }
             .font(.system(size: 16))
         }
     }
-    @ViewBuilder
-    func habitTypeButton(for type: AppModel.HabitType) -> some View {
-        @Bindable var model = appModel
-        let isSelected = model.habitType == type
 
-        Button {
+    func habitTypeButton(for type: SettingsViewModel.HabitType) -> some View {
+        let isSelected = viewModel.habitType == type
+
+        return Button {
             withAnimation(.easeInOut(duration: 0.15)) {
-                model.habitType = type
+                viewModel.habitType = type
             }
         } label: {
             HStack(spacing: 6) {
@@ -187,26 +216,26 @@ private extension SettingsView {
     }
 }
 
-
-// MARK: - Notifications section
+// MARK: - Notifications Section
 private extension SettingsView {
     var notificationsView: some View {
-        @Bindable var model = appModel
-        
+        @Bindable var vm = viewModel
+
         return VStack(spacing: 15) {
             Text("Notifications")
                 .font(.system(size: 16))
-                .opacity(0.5)
+                .foregroundStyle(.white.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack {
                 Text("Daily reminders")
                     .font(.system(size: 16))
                     .fontWeight(.semibold)
+                    .foregroundStyle(.white)
 
                 Spacer()
 
-                Toggle("", isOn: $model.dailyReminders)
+                Toggle("", isOn: $vm.dailyReminders)
                     .labelsHidden()
                     .tint(.green)
             }
@@ -220,15 +249,14 @@ private extension SettingsView {
     }
 }
 
-// MARK: - Data section
-
+// MARK: - Data Section
 private extension SettingsView {
 
     var dataView: some View {
         VStack(spacing: 15) {
             Text("Data")
                 .font(.system(size: 16))
-                .opacity(0.5)
+                .foregroundStyle(.white.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Button {
@@ -256,20 +284,32 @@ private extension SettingsView {
                 titleVisibility: .visible
             ) {
                 Button("Reset all data", role: .destructive) {
-                    // TODO: hook up actual reset logic
+                    resetAllData()
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This can't be undone.")
+                Text("This will permanently clear your logged taps and reset preferences.")
             }
         }
+    }
+
+    /// Clears SwiftData logs and resets all user preferences to default state
+    private func resetAllData() {
+        // 1. Delete all logged Taps from SwiftData
+        do {
+            try modelContext.delete(model: Tap.self)
+            try modelContext.save()
+        } catch {
+            print("Failed to delete Tap records from SwiftData: \(error)")
+        }
+
+        // 2. Reset ViewModel properties and clear UserDefaults
+        viewModel.resetToDefaults()
     }
 }
 
 // MARK: - Preview
-
 #Preview {
     SettingsView()
-        .environment(AppModel())
-
+        .environment(SettingsViewModel())
 }
