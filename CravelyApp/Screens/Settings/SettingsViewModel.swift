@@ -118,7 +118,17 @@ class SettingsViewModel {
     }
 
     var dailyReminders: Bool {
-        didSet { defaults.set(dailyReminders, forKey: "dailyReminders") }
+        didSet {
+            defaults.set(dailyReminders, forKey: "dailyReminders")
+            
+            if dailyReminders {
+                Task {
+                    await NotificationManager.shared.schedule8PMDailyReminder()
+                }
+            } else {
+                NotificationManager.shared.cancelDailyReminder()
+            }
+        }
     }
 
     var totalResisted: Int {

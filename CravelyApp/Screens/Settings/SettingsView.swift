@@ -1,4 +1,3 @@
-//
 //  SettingsView.swift
 //  CravelyApp
 //
@@ -10,11 +9,14 @@ import SwiftData
 
 struct SettingsView: View {
     @State private var showResetConfirmation: Bool = false
+    @State private var showSettingsAlert: Bool = false
     @FocusState private var isPriceFieldFocused: Bool
 
     // MARK: - Dependencies
     @Environment(SettingsViewModel.self) private var viewModel
     @Environment(\.modelContext) private var modelContext
+    
+    private var notificationManager = NotificationManager.shared
 
     var body: some View {
         ScrollView {
@@ -30,13 +32,10 @@ struct SettingsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.ignoresSafeArea())
-        // Tapping anywhere outside the price field dismisses the keyboard.
         .contentShape(Rectangle())
         .onTapGesture {
             isPriceFieldFocused = false
         }
-        // .decimalPad has no Return/Done key, so without this there's no
-        // way to dismiss the keyboard once it's up.
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
@@ -44,6 +43,23 @@ struct SettingsView: View {
                     isPriceFieldFocused = false
                 }
             }
+        }
+        .alert("Notifications Disabled", isPresented: $showSettingsAlert) {
+            Button("Open Settings") {
+                notificationManager.openSystemSettings()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Please turn on notifications in iOS Settings to enable reminders.")
+        }
+        .onAppear {
+            // Make sure the toggle reflects reality as soon as the view shows up,
+            // in case the user changed permissions or the schedule failed while
+            // this view wasn't visible.
+            notificationManager.checkAuthorizationStatus()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            notificationManager.checkAuthorizationStatus()
         }
     }
 }
@@ -153,6 +169,7 @@ private extension SettingsView {
                         .foregroundStyle(Color(white: 0.6))
                 }
             }
+            .sensoryFeedback(.impact(weight: .light, intensity: 0.5), trigger: viewModel.selectedBrand)
         }
     }
 
@@ -213,6 +230,7 @@ private extension SettingsView {
             )
         }
         .buttonStyle(.plain)
+        .sensoryFeedback(.impact(weight: .light, intensity: 0.5), trigger: viewModel.habitType)
     }
 }
 
@@ -227,17 +245,46 @@ private extension SettingsView {
                 .foregroundStyle(.white.opacity(0.5))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            HStack {
-                Text("Daily reminders")
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
+            VStack(spacing: 15) {
+                // MARK: Daily Reminder Toggle
+                HStack {
+                    Text("Daily reminders")
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
 
-                Spacer()
+                    Spacer()
 
-                Toggle("", isOn: $vm.dailyReminders)
+                    Toggle("", isOn: Binding(
+                        // Source of truth is the actual system-scheduled notification,
+                        // not just the cached preference — so the toggle can never show
+                        // "on" when nothing is really scheduled (e.g. permission was
+                        // revoked, or scheduling silently failed).
+                        get: { notificationManager.isDailyReminderScheduled && notificationManager.isAuthorized },
+                        set: { newValue in
+                            if newValue {
+                                Task { @MainActor in
+                                    let granted = await notificationManager.requestAuthorization()
+                                    if granted {
+                                        vm.dailyReminders = true
+                                        await notificationManager.schedule8PMDailyReminder()
+                                    } else if notificationManager.isDenied {
+                                        vm.dailyReminders = false
+                                        showSettingsAlert = true
+                                    } else {
+                                        vm.dailyReminders = false
+                                    }
+                                }
+                            } else {
+                                vm.dailyReminders = false
+                                notificationManager.cancelDailyReminder()
+                            }
+                        }
+                    ))
                     .labelsHidden()
                     .tint(.green)
+                    .sensoryFeedback(.impact(weight: .light, intensity: 0.5), trigger: notificationManager.isDailyReminderScheduled)
+                }
             }
             .padding(16)
             .frame(maxWidth: .infinity)
@@ -278,6 +325,7 @@ private extension SettingsView {
                 )
             }
             .buttonStyle(.plain)
+            .sensoryFeedback(.impact(weight: .medium, intensity: 0.5), trigger: showResetConfirmation)
             .confirmationDialog(
                 "Reset all data?",
                 isPresented: $showResetConfirmation,
@@ -303,7 +351,10 @@ private extension SettingsView {
             print("Failed to delete Tap records from SwiftData: \(error)")
         }
 
-        // 2. Reset ViewModel properties and clear UserDefaults
+        // 2. Clear scheduled and pending notifications
+        NotificationManager.shared.cancelAllNotifications()
+
+        // 3. Reset ViewModel properties and clear UserDefaults
         viewModel.resetToDefaults()
     }
 }

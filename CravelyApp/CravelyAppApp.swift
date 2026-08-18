@@ -9,15 +9,27 @@ import SwiftData
 @main
 struct CravelyAppApp: App {
     @State private var settingsViewModel = SettingsViewModel()
+    @State private var notificationManager = NotificationManager.shared
     @State private var isLoading: Bool = true
+    
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
 
     var body: some Scene {
         WindowGroup {
             ZStack {
-                ContentView()
-                    .environment(settingsViewModel)
-                    .modelContainer(for: Tap.self)
-                    .opacity(isLoading ? 0 : 1)
+                if hasCompletedOnboarding {
+                    ContentView()
+                        .environment(settingsViewModel)
+                        .environment(notificationManager)
+                        .modelContainer(for: Tap.self)
+                        .opacity(isLoading ? 0 : 1)
+                } else {
+                    OnboardingFlowView()
+                        .environment(settingsViewModel)
+                        .environment(notificationManager)
+                        .modelContainer(for: Tap.self)
+                        .opacity(isLoading ? 0 : 1)
+                }
 
                 if isLoading {
                     LaunchScreenView()
@@ -25,7 +37,6 @@ struct CravelyAppApp: App {
                 }
             }
             .task {
-                // Adjust duration as needed
                 try? await Task.sleep(for: .seconds(1.2))
                 
                 withAnimation(.easeOut(duration: 0.35)) {
@@ -35,3 +46,4 @@ struct CravelyAppApp: App {
         }
     }
 }
+

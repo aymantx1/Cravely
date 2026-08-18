@@ -192,6 +192,7 @@ struct HomeView: View {
             } label: {
                 resistButtonLabel
             }
+            .sensoryFeedback(.impact(weight: .medium, intensity: 1.0), trigger: taps.count)
             .buttonStyle(.plain)
             .accessibilityLabel("I crave one")
             .accessibilityHint("Log that you resisted a craving and save $\(String(format: "%.2f", settings.unitPrice))")
