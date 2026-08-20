@@ -30,7 +30,9 @@ Instead of tracking what you consume, Cravely tracks what you *resist*. Every ti
 ## Widgets
 
 <p align="center">
+<<<<<<< HEAD
   <img src="screenshots/widget-gallery.png" width="280" alt="Home Screen widgets — medium and small">
+=======>>>>>>> 124a839d85093528f77d6ba75df2a88bbcd1453c
 </p>
 
 The `CravelyWidget` extension mirrors the app's dark, minimal look across five widget families:
