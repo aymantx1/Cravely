@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/cravelyIcon.png" width="120" alt="Cravely icon">
+<img src="screenshots//cravelyIcon.png" width="120" alt="Cravely icon">
 
 **Track what you resist, not what you consume.**
 
