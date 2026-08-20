@@ -2,7 +2,17 @@
 
 Cravely is an iOS app that helps you quit cigarettes or cannabis by turning every craving you resist into a visible win — a running savings total, a streak, and a history you can look back on.
 
+<<<<<<< HEAD
 Built with **SwiftUI** and **SwiftData**, using an **MVVM** architecture.
+=======
+Built with **SwiftUI** and **SwiftData**, using an **MVVM** architecture, with **Home Screen and Lock Screen widgets** via WidgetKit.
+
+<p align="center">
+  <img src="Screenshots/home.png" width="260" alt="Home screen — resist button, streak, and savings">
+  <img src="Screenshots/history.png" width="260" alt="History — day-by-day log of resisted cravings">
+  <img src="Screenshots/settings.png" width="260" alt="Settings — habit type, brand, pricing">
+</p>
+>>>>>>> 357986936aa29470a310072cf7d0448d3f2ff4b7
 
 ## How it works
 
@@ -22,7 +32,34 @@ Instead of tracking what you consume, Cravely tracks what you *resist*. Every ti
 
 ## Roadmap
 
+<<<<<<< HEAD
 - 📱 **Home Screen & Lock Screen widgets** (WidgetKit) — surface streak and savings totals without opening the app
+=======
+<p align="center">
+<<<<<<< HEAD
+  <img src="Screenshots/widget-gallery.png" width="280" alt="Home Screen widgets — medium and small">
+=======>>>>>>> 124a839d85093528f77d6ba75df2a88bbcd1453c
+</p>
+
+The `CravelyWidget` extension mirrors the app's dark, minimal look across five widget families:
+
+| Family | What it shows |
+|---|---|
+| Home Screen — Small | Habit icon, streak, total saved |
+| Home Screen — Medium | Total saved + brand/unit price, streak, resisted count, last crave |
+| Lock Screen — Circular | 🔥 + streak number |
+| Lock Screen — Rectangular | Total saved + streak |
+| Lock Screen — Inline | Streak + total saved as a single line |
+
+**How the data gets to the widget:** the app and widget are separate processes, so they can't share in-memory state or a private SwiftData container directly. Instead:
+
+1. `HomeViewModel` already computes everything `HomeView` needs (streak, total saved, last crave, etc.) from the SwiftData `@Query`.
+2. Whenever that data changes, `HomeView` calls `updateWidgetSnapshot(from:settings:)`, which packages those same numbers into a small `Codable` struct (`CravelySnapshot`) and writes it to a shared **App Group** `UserDefaults` suite via `SharedStore`.
+3. It then calls `WidgetCenter.shared.reloadAllTimelines()`, so the widget refreshes within a couple seconds of tapping "I crave one" — no polling, no duplicate SwiftData container in the widget extension.
+4. `CravelyProvider` (a `TimelineProvider`) reads that snapshot and also schedules an hourly fallback refresh, in case the app hasn't been opened in a while.
+
+This keeps the widget's numbers always in sync with what the app itself is showing, and keeps the widget extension lightweight — it never touches SwiftData.
+>>>>>>> 357986936aa29470a310072cf7d0448d3f2ff4b7
 
 ## Tech stack
 
