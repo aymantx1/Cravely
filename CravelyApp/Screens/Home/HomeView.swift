@@ -46,6 +46,12 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.ignoresSafeArea())
+        .onAppear {
+            viewModel.updateWidgetSnapshot(from: taps, settings: settings)
+        }
+        .onChange(of: taps.count) {
+            viewModel.updateWidgetSnapshot(from: taps, settings: settings)
+        }
     }
 
     // MARK: - Header Views

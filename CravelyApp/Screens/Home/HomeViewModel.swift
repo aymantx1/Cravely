@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import Foundation
 import Observation
+import WidgetKit
 
 @Observable
 class HomeViewModel {
@@ -104,5 +105,26 @@ class HomeViewModel {
         }
         
         return streak
+    }
+
+    // MARK: - Widget Sync
+
+    /// Pushes the latest stats to the widget's shared App Group storage and
+    /// asks WidgetKit to refresh immediately.
+    func updateWidgetSnapshot(from taps: [Tap], settings: SettingsViewModel) {
+        let snapshot = CravelySnapshot(
+            totalSaved: allTimeTotalCost(from: taps),
+            streak: currentStreak(from: taps),
+            todayCount: todayTapsCount(from: taps),
+            totalCount: taps.count,
+            lastCraveText: lastCraveText(from: taps),
+            avgDailySave: averageDailySave(from: taps),
+            unitPrice: settings.unitPrice,
+            habitEmoji: settings.habitType.emoji,
+            selectedBrand: settings.selectedBrand,
+            updatedAt: Date()
+        )
+        SharedStore.save(snapshot)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

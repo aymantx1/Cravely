@@ -6,11 +6,59 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		404B5C3A3037820600C16888 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404B5C393037820600C16888 /* WidgetKit.framework */; };
+		404B5C3C3037820600C16888 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404B5C3B3037820600C16888 /* SwiftUI.framework */; };
+		404B5C4A3037820800C16888 /* CravelyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 404B5C373037820600C16888 /* CravelyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		404B5C473037820800C16888 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40B70844301146A200E37C25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 404B5C363037820600C16888;
+			remoteInfo = CravelyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		404B5C493037820800C16888 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				404B5C4A3037820800C16888 /* CravelyWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		404B5C373037820600C16888 /* CravelyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CravelyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		404B5C393037820600C16888 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		404B5C3B3037820600C16888 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		404B5C503037826F00C16888 /* CravelyWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CravelyWidgetExtension.entitlements; sourceTree = "<group>"; };
 		40B7084C301146A200E37C25 /* CravelyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CravelyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		404B5C4E3037820800C16888 /* Exceptions for "CravelyWidget" folder in "CravelyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 404B5C363037820600C16888 /* CravelyWidgetExtension */;
+		};
+		404B5C553037831D00C16888 /* Exceptions for "CravelyApp" folder in "CravelyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Shared/CravelySnapshot.swift,
+			);
+			target = 404B5C363037820600C16888 /* CravelyWidgetExtension */;
+		};
 		406EA7A43034BDB200038E30 /* Exceptions for "CravelyApp" folder in "CravelyApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -21,10 +69,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		404B5C3D3037820600C16888 /* CravelyWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				404B5C4E3037820800C16888 /* Exceptions for "CravelyWidget" folder in "CravelyWidgetExtension" target */,
+			);
+			path = CravelyWidget;
+			sourceTree = "<group>";
+		};
 		40B7084E301146A200E37C25 /* CravelyApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				406EA7A43034BDB200038E30 /* Exceptions for "CravelyApp" folder in "CravelyApp" target */,
+				404B5C553037831D00C16888 /* Exceptions for "CravelyApp" folder in "CravelyWidgetExtension" target */,
 			);
 			path = CravelyApp;
 			sourceTree = "<group>";
@@ -32,6 +89,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		404B5C343037820600C16888 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				404B5C3C3037820600C16888 /* SwiftUI.framework in Frameworks */,
+				404B5C3A3037820600C16888 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40B70849301146A200E37C25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,10 +108,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		404B5C383037820600C16888 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				404B5C393037820600C16888 /* WidgetKit.framework */,
+				404B5C3B3037820600C16888 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		40B70843301146A200E37C25 = {
 			isa = PBXGroup;
 			children = (
+				404B5C503037826F00C16888 /* CravelyWidgetExtension.entitlements */,
 				40B7084E301146A200E37C25 /* CravelyApp */,
+				404B5C3D3037820600C16888 /* CravelyWidget */,
+				404B5C383037820600C16888 /* Frameworks */,
 				40B7084D301146A200E37C25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				40B7084C301146A200E37C25 /* CravelyApp.app */,
+				404B5C373037820600C16888 /* CravelyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +140,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		404B5C363037820600C16888 /* CravelyWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 404B5C4D3037820800C16888 /* Build configuration list for PBXNativeTarget "CravelyWidgetExtension" */;
+			buildPhases = (
+				404B5C333037820600C16888 /* Sources */,
+				404B5C343037820600C16888 /* Frameworks */,
+				404B5C353037820600C16888 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				404B5C3D3037820600C16888 /* CravelyWidget */,
+			);
+			name = CravelyWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = CravelyWidgetExtension;
+			productReference = 404B5C373037820600C16888 /* CravelyWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		40B7084B301146A200E37C25 /* CravelyApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40B70857301146A400E37C25 /* Build configuration list for PBXNativeTarget "CravelyApp" */;
@@ -68,10 +169,12 @@
 				40B70848301146A200E37C25 /* Sources */,
 				40B70849301146A200E37C25 /* Frameworks */,
 				40B7084A301146A200E37C25 /* Resources */,
+				404B5C493037820800C16888 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				404B5C483037820800C16888 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				40B7084E301146A200E37C25 /* CravelyApp */,
@@ -93,6 +196,9 @@
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					404B5C363037820600C16888 = {
+						CreatedOnToolsVersion = 26.6;
+					};
 					40B7084B301146A200E37C25 = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -113,11 +219,19 @@
 			projectRoot = "";
 			targets = (
 				40B7084B301146A200E37C25 /* CravelyApp */,
+				404B5C363037820600C16888 /* CravelyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		404B5C353037820600C16888 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40B7084A301146A200E37C25 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +242,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		404B5C333037820600C16888 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40B70848301146A200E37C25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +258,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		404B5C483037820800C16888 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 404B5C363037820600C16888 /* CravelyWidgetExtension */;
+			targetProxy = 404B5C473037820800C16888 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		404B5C4B3037820800C16888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CravelyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7US2RP2LLA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CravelyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CravelyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.CravelyApp.CravelyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		404B5C4C3037820800C16888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CravelyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7US2RP2LLA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CravelyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CravelyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aymancodes.CravelyApp.CravelyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		40B70855301146A400E37C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -264,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CravelyApp/CravelyApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7US2RP2LLA;
@@ -295,6 +487,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CravelyApp/CravelyApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7US2RP2LLA;
@@ -324,6 +517,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		404B5C4D3037820800C16888 /* Build configuration list for PBXNativeTarget "CravelyWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				404B5C4B3037820800C16888 /* Debug */,
+				404B5C4C3037820800C16888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		40B70847301146A200E37C25 /* Build configuration list for PBXProject "CravelyApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
