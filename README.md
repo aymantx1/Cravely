@@ -5,7 +5,7 @@ Cravely is an iOS app that helps you quit cigarettes or cannabis by turning ever
 Built with **SwiftUI** and **SwiftData**, using an **MVVM** architecture, with **Home Screen and Lock Screen widgets** via WidgetKit.
 
 <p align="center">
-  <img src="screenshots/home.png" width="260" alt="Home screen — resist button, streak, and savings">
+  <img src="Screenshots/home.png" width="260" alt="Home screen — resist button, streak, and savings">
   <img src="screenshots/history.png" width="260" alt="History — day-by-day log of resisted cravings">
   <img src="screenshots/settings.png" width="260" alt="Settings — habit type, brand, pricing">
 </p>
