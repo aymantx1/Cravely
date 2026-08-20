@@ -6,8 +6,8 @@ Built with **SwiftUI** and **SwiftData**, using an **MVVM** architecture, with *
 
 <p align="center">
   <img src="Screenshots/home.png" width="260" alt="Home screen — resist button, streak, and savings">
-  <img src="screenshots/history.png" width="260" alt="History — day-by-day log of resisted cravings">
-  <img src="screenshots/settings.png" width="260" alt="Settings — habit type, brand, pricing">
+  <img src="Screenshots/history.png" width="260" alt="History — day-by-day log of resisted cravings">
+  <img src="Screenshots/settings.png" width="260" alt="Settings — habit type, brand, pricing">
 </p>
 
 ## How it works
@@ -31,7 +31,7 @@ Instead of tracking what you consume, Cravely tracks what you *resist*. Every ti
 
 <p align="center">
 <<<<<<< HEAD
-  <img src="screenshots/widget-gallery.png" width="280" alt="Home Screen widgets — medium and small">
+  <img src="Screenshots/widget-gallery.png" width="280" alt="Home Screen widgets — medium and small">
 =======>>>>>>> 124a839d85093528f77d6ba75df2a88bbcd1453c
 </p>
 
